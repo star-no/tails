@@ -25,7 +25,7 @@ func main() {
 	}
 
 	filePath := *file
-	if !strings.Contains(filePath, dir) {
+	if !strings.HasPrefix(filePath, "/") && !strings.Contains(filePath, dir) {
 		filePath = dir + "/" + filePath
 	}
 
@@ -41,7 +41,8 @@ func main() {
 	}
 	defer f.Close()
 
-	var currentSeek int64 = 0
+	fileInfo, _ := f.Stat()
+	currentSeek := fileInfo.Size()
 	r := regexp.MustCompile("\\d{4}-\\d{2}-\\d{2}.*")
 
 	for {
@@ -53,7 +54,7 @@ func main() {
 		if len(bytes) != 0 {
 			currentSeek += int64(len(bytes))
 			if !r.Match(bytes) {
-				fmt.Println(string(bytes))
+				fmt.Print(string(bytes))
 				continue
 			}
 
