@@ -1,0 +1,17 @@
+- pattern: \d{4}-\d{2}-\d{2}.*
+  numberMap:
+    2: green
+    3: magenta
+    6: cyan
+  wordMap:
+    select: blue
+    delete: blue
+    update: blue
+    from: blue
+    where: blue
+
+
+- pattern: ^nocomet.*
+  numberMap:
+    1: red
+    2: blue

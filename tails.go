@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"flag"
-	"os"
-	"time"
 	"bufio"
+	"flag"
+	"fmt"
 	. "github.com/logrusorgru/aurora"
-	"strings"
-	"path/filepath"
-	"log"
+	"os"
 	"regexp"
+	"strings"
+	"tails/reader/config"
+	"time"
+	"unicode/utf8"
 )
 
 var file = flag.String("f", "", "file-name")
@@ -19,31 +19,49 @@ var debug = flag.Bool("d", false, "debug")
 func main() {
 	flag.Parse()
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+	config.ReadConfigFile()
 
-	filePath := *file
-	if !strings.HasPrefix(filePath, "/") && !strings.Contains(filePath, dir) {
-		filePath = dir + "/" + filePath
-	}
-
+	filepath := parseFilepath()
 	if *debug {
-		fmt.Println("[DEBUG]", dir)
-		fmt.Println("[DEBUG]", *file)
-		fmt.Println("[DEBUG]", filePath)
+		fmt.Println("[DEBUG]", filepath)
 	}
 
-	f, err := os.Open(filePath)
+	f := openFile(filepath)
+	defer f.Close()
+
+	printTargetFile(f)
+}
+
+func parseFilepath() string {
+	if *debug {
+		fmt.Println("[DEBUG]", config.RootPath)
+		fmt.Println("[DEBUG]", *file)
+	}
+
+	inputFilepath := *file
+
+	if strings.HasPrefix(inputFilepath, "~/") {
+		return inputFilepath
+	}
+
+	if strings.HasPrefix(inputFilepath, "/") {
+		return inputFilepath
+	}
+
+	return config.RootPath + "/" + inputFilepath
+}
+
+func openFile(fileName string) *os.File {
+	f, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
 	}
-	defer f.Close()
 
-	fileInfo, _ := f.Stat()
-	currentSeek := fileInfo.Size()
-	r := regexp.MustCompile("\\d{4}-\\d{2}-\\d{2}.*")
+	return f
+}
+
+func printTargetFile(f *os.File) {
+	var currentSeek int64 = 0
 
 	for {
 		f.Seek(currentSeek, 0)
@@ -53,32 +71,78 @@ func main() {
 
 		if len(bytes) != 0 {
 			currentSeek += int64(len(bytes))
-			if !r.Match(bytes) {
-				fmt.Print(string(bytes))
-				continue
-			}
 
-			buf := []interface{}{}
-			line := string(bytes)
-
-			words := strings.Fields(line)
-
-			for idx, s := range words {
-				switch idx {
-				case 2:
-					buf = append(buf, Green(s))
-				case 3:
-					buf = append(buf, Magenta(s))
-				case 6:
-					buf = append(buf, Cyan(s))
-				default:
-					buf = append(buf, s)
+			for _, c := range config.ConfigList {
+				r := regexp.MustCompile(c.Input)
+				if r.Match(bytes) {
+					printColor(c, bytes)
+					goto End
 				}
 			}
-			fmt.Println(strings.Trim(fmt.Sprint(buf), "[]"))
 
+			fmt.Print(string(bytes))
+		End:
 		} else {
 			time.Sleep(time.Millisecond * 50)
 		}
 	}
+}
+
+func printColor(config config.Config, bytes []byte) {
+	buf := []interface{}{}
+	line := string(bytes)
+	words := strings.Fields(line)
+
+	for idx, str := range words {
+		var color = "black"
+
+		c, prs := config.NumberMap[idx]
+		if prs {
+			color = c
+		}
+
+		c, prs = config.WordMap[str]
+		if prs {
+			color = c
+		}
+
+		var coloredString Value
+		switch color {
+		case "black":
+			coloredString = Black(str)
+		case "green":
+			coloredString = Green(str)
+		case "gray":
+			coloredString = Gray(str)
+		case "magenta":
+			coloredString = Magenta(str)
+		case "red":
+			coloredString = Red(str)
+		case "blue":
+			coloredString = Blue(str)
+		case "cyan":
+			coloredString = Cyan(str)
+		}
+
+		buf = append(buf, coloredString)
+
+		if idx < len(words)-1 {
+			buf = printSpace(line, str, buf)
+		}
+	}
+
+	fmt.Println(strings.Trim(fmt.Sprint(buf), "[]"))
+}
+
+func printSpace(line string, str string, buf []interface{}) []interface{} {
+	start := strings.Index(line, str) + utf8.RuneCountInString(str)
+	var space = ""
+	for i := start + 1; ' ' == line[i]; i++ {
+		space += " "
+	}
+
+	if space != "" {
+		buf = append(buf, space)
+	}
+	return buf
 }

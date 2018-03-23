@@ -1,0 +1,22 @@
+2018-03-23    17:26:17.490 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.490 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+2018-03-23 17:26:17.496 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, machine0_.hostname as hostname3_11_, machine0_.ip as ip4_11_, machine0_.region_id as region_i6_11_, machine0_.type as type5_11_ from machine machine0_ where machine0_.ip=?
+2018-03-23 17:26:17.497 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.95]
+2018-03-23 17:26:17.506 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.506 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+2018-03-23 17:26:17.513 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, machine0_.hostname as hostname3_11_, machine0_.ip as ip4_11_, machine0_.region_id as region_i6_11_, machine0_.type as type5_11_ from machine machine0_ where machine0_.ip=?
+2018-03-23 17:26:17.514 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.95]
+2018-03-23 17:26:17.521 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.521 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+2018-03-23 17:26:17.529 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, machine0_.hostname as hostname3_11_, machine0_.ip as ip4_11_, machine0_.region_id as region_i6_11_, machine0_.type as type5_11_ from machine machine0_ where machine0_.ip=?
+2018-03-23 17:26:17.529 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.95]
+2018-03-23 17:26:17.535 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.535 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+nocomet: select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, machine0_.hostname as hostname3_11_, machine0_.ip as ip4_11_, machine0_.region_id as region_i6_11_, machine0_.type as type5_11_ from machine machine0_ where machine0_.ip=?
+2018-03-23 17:26:17.543 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.95]
+2018-03-23 17:26:17.551 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.551 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+2018-03-23 17:26:17.560 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, machine0_.hostname as hostname3_11_, machine0_.ip as ip4_11_, machine0_.region_id as region_i6_11_, machine0_.type as type5_11_ from machine machine0_ where machine0_.ip=?
+2018-03-23 17:26:17.561 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.96]
+2018-03-23 17:26:17.568 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.568 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
