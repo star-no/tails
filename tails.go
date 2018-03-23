@@ -61,7 +61,12 @@ func openFile(fileName string) *os.File {
 }
 
 func printTargetFile(f *os.File) {
-	var currentSeek int64 = 0
+	fi, err := f.Stat()
+	if err != nil {
+		panic(err)
+	}
+
+	var currentSeek = fi.Size() - 1024
 
 	for {
 		f.Seek(currentSeek, 0)
@@ -94,7 +99,7 @@ func printColor(config config.Config, bytes []byte) {
 	words := strings.Fields(line)
 
 	for idx, str := range words {
-		var color = "black"
+		var color = "non-color"
 
 		c, prs := config.NumberMap[idx]
 		if prs {
@@ -106,8 +111,10 @@ func printColor(config config.Config, bytes []byte) {
 			color = c
 		}
 
-		var coloredString Value
+		var coloredString interface{}
 		switch color {
+		case "non-color":
+			coloredString = str
 		case "black":
 			coloredString = Black(str)
 		case "green":

@@ -20,3 +20,5 @@ nocomet: select machine0_.id as id1_11_, machine0_.capacity as capacity2_11_, ma
 2018-03-23 17:26:17.561 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [10.114.50.96]
 2018-03-23 17:26:17.568 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
 2018-03-23 17:26:17.568 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
+2018-03-23 17:26:17.568 DEBUG 90101 --- [nio-9090-exec-3] org.hibernate.SQL                        : select region0_.id as id1_23_0_, region0_.name as name2_23_0_ from region region0_ where region0_.id=?
+2018-03-23 17:26:17.568 TRACE 90101 --- [nio-9090-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [KR]
