@@ -67,6 +67,9 @@ func printTargetFile(f *os.File) {
 	}
 
 	var currentSeek = fi.Size() - 1024
+	if currentSeek < 0 {
+		currentSeek = 0
+	}
 
 	for {
 		f.Seek(currentSeek, 0)

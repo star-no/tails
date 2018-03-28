@@ -21,6 +21,7 @@ func ReadConfigFile() {
 	RootPath, _ = filepath.Abs(filepath.Dir(os.Args[0]))
 
 	f, err := os.Open(RootPath + "/config.yaml")
+	//f, err := os.Open("/Users/Naver/go/src/tails/config.yaml")
 	if err != nil {
 		log.Fatal("can't find file 'config.yaml'\nConfig file must exist at " + RootPath + "\n")
 	}
